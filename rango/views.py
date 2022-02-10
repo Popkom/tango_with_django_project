@@ -35,7 +35,6 @@ def index(request):
     context_dict['pages'] = page_list
 
     visitor_cookie_handler(request)
-    context_dict['visits'] = request.session['visits']
 
     response = render(request, 'rango/index.html', context=context_dict)
 
@@ -43,9 +42,11 @@ def index(request):
 
 def about(request):
 
+    context_dict = {}
+    visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
 
-
-    return render(request, 'rango/about.html')
+    return render(request, 'rango/about.html', context = context_dict)
 
 @login_required
 def add_category(request):
